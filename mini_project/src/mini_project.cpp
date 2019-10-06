@@ -35,6 +35,11 @@ public:
 	void select_song(int tag);	//selects the song to be played
 
 	void shuffle_play();	//arranges the songs in a random order in the playlist
+	
+	void play(string song_loc);	//plays the song
+
+	void stop();		//stops the song
+
 
 };
 
@@ -45,6 +50,22 @@ public:
 		name = 'New Playlist';
 	}
 };
+
+void Song::play(string song_loc){
+	char k;
+	char *cstr = new char[song_loc.length() + 1];
+	strcpy(cstr, song_loc.c_str());
+	PlaySound(cstr, NULL,SND_ASYNC );
+	cout<<"Enter any character to stop:\n";
+	cin>>k;
+	if(k=='n')
+		stop();
+	else play(song_loc);
+}
+
+void Song::stop(){
+	PlaySound(NULL, 0, 0);
+}
 
 int main(int argc, char* argv[])
 {
